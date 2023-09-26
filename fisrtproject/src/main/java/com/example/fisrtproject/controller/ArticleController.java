@@ -63,7 +63,7 @@ public class ArticleController {
     @GetMapping("/articles")
     public String index(Model model) {
         // 1. 모든 아티클을 가져온다
-        Iterable<Article> articleEntityList = articleRepository.findAll();
+        List<Article> articleEntityList = articleRepository.findAll();
 
         // 2. 가져온 아티클 묶음을 뷰로 전달한다
         model.addAttribute("articleList", articleEntityList);

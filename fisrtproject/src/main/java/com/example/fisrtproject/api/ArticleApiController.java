@@ -2,13 +2,14 @@ package com.example.fisrtproject.api;
 
 import com.example.fisrtproject.dto.ArticleForm;
 import com.example.fisrtproject.entity.Article;
-import com.example.fisrtproject.repository.ArticleRepository;
 import com.example.fisrtproject.service.ArticleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j // 로깅을 위한 어노테이션
 ////1. 먼저 RestController 선언하기
@@ -100,7 +101,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 
-//------- 서비스계층 -------
+//------- 서비스계층추가 -------
 @RestController
 public class ArticleApiController {
 
@@ -110,7 +111,7 @@ public class ArticleApiController {
 
     //    6. 기존에는 리파지토리에서 가져왔는데, 이젠 서비스를 통해 가져올 거임
     @GetMapping("/api/articles")
-    public Iterable<Article> index() {
+    public List<Article> index() {
         return articleservie.index(); // 7. index 메소드로 가져오게 할 거임 > 없으니 오류 > 만들어주기
     }
 
@@ -138,6 +139,15 @@ public class ArticleApiController {
     public ResponseEntity<Article> delete(@PathVariable Long id) {
         Article deleted = articleservie.delete(id);
         return (deleted != null ) ? ResponseEntity.status(HttpStatus.OK).body(deleted) : ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    }
+
+    // 트랜잭션 실패 -> 롤백 !
+    @PostMapping("/api/transaction-test")
+    public ResponseEntity<List<Article>> transactionTest(@RequestBody List<ArticleForm> dtos) { // ResponseEntity에 List형식으로 Article을 던짐
+//        RequestBody를 통해 ArticleForm을 받아오고 ArticleForm을 여러개 받으니 List 묶음으로 받아옴
+        List<Article> createList = articleservie.createArticle(dtos);
+
+        return (createList != null ) ? ResponseEntity.status(HttpStatus.OK).body(createList) : ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 }
 
