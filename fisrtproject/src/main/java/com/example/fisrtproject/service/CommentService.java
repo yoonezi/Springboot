@@ -66,7 +66,7 @@ public class CommentService {
         return CommentDto.createCommentDto(updated);
 
     }
-    
+
     @Transactional
     public CommentDto delete(Long id) {
         // 댓글 조회 및 예외 발생
