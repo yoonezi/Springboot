@@ -19,7 +19,7 @@ public class CommentApiController {
     private CommentService commentService; //3. CommentService 만들어주기
 
     // 댓글 목록 조회
-    @GetMapping("/api/articles/{articleId}/commnets")
+    @GetMapping("/api/articles/{articleId}/comments")
     public ResponseEntity<List<CommentDto>> comments(@PathVariable Long articleId) {
 //        DTO는 클라이언트와 컨트롤러사이에서 엔티티는 서버 내부에서 사용하는게 일반적인 실무 원칙
 
@@ -33,7 +33,7 @@ public class CommentApiController {
     }
 
     // 댓글 생성
-    @PostMapping("/api/articles/{articleId}/commnets")
+    @PostMapping("/api/articles/{articleId}/comments")
     public ResponseEntity<CommentDto> create(@PathVariable Long articleId, @RequestBody CommentDto dto) {
 
         // 1. 서비스에게 위임
