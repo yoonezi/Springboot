@@ -16,6 +16,10 @@ repositories {
 }
 
 dependencies {
+	// mysql 드라이버 추가
+//	runtimeOnly 'com.mysql:mysql-connector-j'
+	implementation 'mysql:mysql-connector-java'
+
 	// 롬복 추가
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
