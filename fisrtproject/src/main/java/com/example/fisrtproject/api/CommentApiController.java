@@ -1,5 +1,6 @@
 package com.example.fisrtproject.api;
 
+import com.example.fisrtproject.annotation.RunningTime;
 import com.example.fisrtproject.dto.CommentDto;
 import com.example.fisrtproject.entity.Comment;
 import com.example.fisrtproject.service.CommentService;
@@ -54,6 +55,7 @@ public class CommentApiController {
 
     }
 
+    @RunningTime
     // 댓글 삭제
     @DeleteMapping("/api/comments/{id}")
     public ResponseEntity<CommentDto> delete(@PathVariable Long id){
